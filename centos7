@@ -33,7 +33,7 @@ server_ram_mb=$(echo "scale=0;$server_ram_total/1024" | bc)
 server_hdd=$(df -h | awk 'NR==2 {print $2}')
 server_swap_total=$(awk '/SwapTotal/ {print $2}' /proc/meminfo)
 server_swap_mb=$(echo "scale=0;$server_swap_total/1024" | bc)
-server_ip=$(curl -s https://survps.com/scripts/ip/)
+server_ip=$(curl -s  ifconfig.me)
 
 print_message "Thong so server cua ban nhu sau"
 echo "Loai CPU : $cpu_name"
@@ -939,7 +939,7 @@ print_message "Thong tin quan ly duoc luu tai: /root/survps-script.txt"
 printf "***Luu y: Port dang nhap SSH da duoc doi tu 22 sang $ssh_port de bao mat VPS\n"
 print_message
 printf "De quan ly server, ban hay dung lenh \"survps\" khi ket noi SSH.\n"
-printf "Neu can ho tro, cac ban hay truy cap https://survps.com/script/\n"
+printf "Neu can ho tro, cac ban hay truy cap https://survps.com/\n"
 print_message
 printf "Server se tu dong khoi dong lai sau 3s nua.... \n\n"
 sleep 3
