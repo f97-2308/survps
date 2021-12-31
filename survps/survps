@@ -37,6 +37,10 @@ select opt in "${options[@]}" "Thoat"; do
         printf "\nChao tam biet!\nHen gap lai ban o http://survps.com/\n\n"
         break
         ;;
+    0)
+        printf "\nChao tam biet!\nHen gap lai ban o http://survps.com/\n\n"
+        break
+        ;;
     *)
         echo "Ban nhap sai, vui long nhap theo so thu tu tren danh sach"
         continue
