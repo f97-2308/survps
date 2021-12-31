@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################################
-# SurVPS Script v2.1.0 for CentOS 7
+# SurVPS Script v1.0.0 for CentOS 7
 # To install type:
 # curl -sO https://survps.com/install && bash install
 # or
@@ -9,9 +9,7 @@
 ROOT_FOLDER="$(pwd)"
 survps_version="1.0.0"
 phpmyadmin_version="5.1.1"
-extplorer_version="2.1.14"
-extplorer_id="94"
-low_ram='262144' # 256MB
+low_ram='262144'
 LINE="========================================================================="
 print_message() {
     if [ "$1" == "" ]; then
@@ -744,20 +742,6 @@ mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localho
 sed -i "s/\/\/ \$cfg\['Servers'\]\[\$i\]\['controluser'\] = 'pma'/\$cfg\['Servers'\]\[\$i\]\['controluser'\] = 'pma'/" config.inc.php
 sed -i "s/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] = 'pmapass'/\$cfg\['Servers'\]\[\$i\]\['controlpass'\] = '$pmapass'/" config.inc.php
 
-# eXtplorer File Manager
-mkdir /home/$server_name/private_html/filemanager/
-cd /home/$server_name/private_html/filemanager/
-wget --no-check-certificate -q https://extplorer.net/attachments/download/$extplorer_id/eXtplorer_$extplorer_version.zip
-unzip -q eXtplorer_$extplorer_version.zip && rm -f eXtplorer_$extplorer_version.zip
-cat >"/home/$server_name/private_html/filemanager/config/.htusers.php" <<END
-<?php
-        if( !defined( '_JEXEC' ) && !defined( '_VALID_MOS' ) ) die( 'Restricted access' );
-        \$GLOBALS["users"]=array(
-        array('admin','$(echo -n "$admin_password" | md5sum | awk '{print $1}')','/home','http://localhost','1','','7',1),
-);
-?>
-END
-
 # Log Rotation
 cat >"/etc/logrotate.d/nginx" <<END
 /home/*/logs/access.log /home/*/logs/error.log /home/*/logs/nginx_error.log {
@@ -889,7 +873,6 @@ Lenh truy cap menu SurVPS Script: survps
 Domain chinh: http://$server_name/ hoac http://$server_ip/
 
 SurVPS Script Admin: http://$server_name:$admin_port/ hoac http://$server_ip:$admin_port/
-File Manager:        http://$server_name:$admin_port/filemanager/ hoac http://$server_ip:$admin_port/filemanager/
 phpMyAdmin:          http://$server_name:$admin_port/phpmyadmin/ hoac http://$server_ip:$admin_port/phpmyadmin/
 Server Info:         http://$server_name:$admin_port/serverinfo/ hoac http://$server_ip:$admin_port/serverinfo/
 PHP OPcache:         http://$server_name:$admin_port/op.php hoac http://$server_ip:$admin_port/op.php
@@ -916,7 +899,6 @@ fi
 
 print_message
 printf "SurVPS Script Admin: http://$server_name:$admin_port/ \n hoac http://$server_ip:$admin_port/\n\n"
-printf "File Manager: http://$server_name:$admin_port/filemanager/ \n hoac http://$server_ip:$admin_port/filemanager/\n\n"
 printf "phpMyAdmin: http://$server_name:$admin_port/phpmyadmin/ \n hoac http://$server_ip:$admin_port/phpmyadmin/\n\n"
 printf "Server Info: http://$server_name:$admin_port/serverinfo/ \n hoac http://$server_ip:$admin_port/serverinfo/\n\n"
 printf "PHP OPcache: http://$server_name:$admin_port/op.php \n hoac http://$server_ip:$admin_port/op.php\n"
