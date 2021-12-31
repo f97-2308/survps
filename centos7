@@ -162,7 +162,7 @@ sleep 3
 # Enable Remi Repo
 yum-config-manager --enable remi
 
-elif [ "$php_version" != "" ]; then
+if [ "$php_version" != "" ]; then
     yum-config-manager --enable remi-php$php_version
     yum -y install nginx php-fpm php-common php-gd php-mysqlnd php-pdo php-xml php-mbstring php-mcrypt php-curl php-opcache php-cli
 else
