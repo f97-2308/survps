@@ -97,7 +97,7 @@ select opt in "${options[@]}"; do
 
 done
 
-print_message "Nhap vao ten mien chinh (non-www hoac www) roi an [ENTER]: "
+printf "Nhap vao ten mien chinh (non-www hoac www) roi an [ENTER]: "
 read server_name
 if [ "$server_name" = "" ]; then
     server_name="survps.com"
