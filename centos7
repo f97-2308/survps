@@ -51,50 +51,49 @@ print_message "Chuan bi qua trinh cai dat..."
 printf "Ban hay lua chon phien ban PHP muon su dung:\n"
 prompt="Nhap vao lua chon cua ban [1-7]: "
 php_version="80" # Default PHP 8.0
-# options=("PHP 8.0" "PHP 7.4" "PHP 7.3" "PHP 7.2" "PHP 7.1" "PHP 7.0" "PHP 5.6")
-# select opt in "${options[@]}"; do
-#         php_version="74"
-#         break
-#         ;;
-#     3)
-#         php_version="73"
-#         break
-#         ;;
-#     4)
-#         php_version="72"
-#         break
-#         ;;
-#     5)
-#         php_version="71"
-#         break
-#         ;;
-#     6)
-#         php_version="70"
-#         break
-#         ;;
-#     7)
-#         php_version="56"
-#         break
-#         ;;
-#     $((${#options[@]} + 1)))
-#         printf "\nHe thong se cai dat PHP $php_version\n"
-#         break
-#         ;;
-#     *)
-#         printf "Ban nhap sai, he thong cai dat PHP $php_version\n"
-#         break
-#         ;;
-#     esac
+options=("PHP 8.0" "PHP 7.4" "PHP 7.3" "PHP 7.2" "PHP 7.1" "PHP 7.0" "PHP 5.6")
+select opt in "${options[@]}"; do
+        php_version="74"
+        break
+        ;;
+    3)
+        php_version="73"
+        break
+        ;;
+    4)
+        php_version="72"
+        break
+        ;;
+    5)
+        php_version="71"
+        break
+        ;;
+    6)
+        php_version="70"
+        break
+        ;;
+    7)
+        php_version="56"
+        break
+        ;;
+    $((${#options[@]} + 1)))
+        printf "\nHe thong se cai dat PHP $php_version\n"
+        break
+        ;;
+    *)
+        printf "Ban nhap sai, he thong cai dat PHP $php_version\n"
+        break
+        ;;
+    esac
 
-# done
+done
 
-# printf "Nhap vao ten mien chinh (non-www hoac www) roi an [ENTER]: "
-# read server_name
-# if [ "$server_name" = "" ]; then
-#     server_name="survps.com"
-#     echo "Ban nhap sai, he thong dung $server_name lam ten mien chinh"
-# fi
-server_name="hentaivsub.com"
+printf "Nhap vao ten mien chinh (non-www hoac www) roi an [ENTER]: "
+read server_name
+if [ "$server_name" = "" ]; then
+    server_name="f97.xyz"
+    echo "Ban nhap sai, he thong dung $server_name lam ten mien chinh"
+fi
 
 ssh_port=26266
 admin_port=$((2001 + RANDOM % 7990))
@@ -718,6 +717,7 @@ else
   git clone https://github.com/prasathmani/tinyfilemanager.git .
 fi
 
+mv tinyfilemanager.php index.php
 cp -rf $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
 sed -i "s/tinyfilemanagersurvpsadmin/$admin_password/g" config.php
 
@@ -837,7 +837,7 @@ clear
 print_message "Cau hinh hoan tat, bat dau them menu survps, nhanh thoi..."
 
 >/bin/survps
-cat $ROOT_FOLDER/survps/survps >/bin/survps && chmod +x /bin/survps
+cat $ROOT_FOLDER/survps/survps >/bin/sur && chmod +x /bin/sur
 mkdir -p /etc/survps/menu/
 /usr/bin/cp $ROOT_FOLDER/component/menu/* /etc/survps/menu
 chmod +x /etc/survps/menu/*
@@ -847,7 +847,7 @@ cat >"/root/survps-script.txt" <<END
 =========================================================================
                         MANAGE VPS INFORMATION
 =========================================================================
-Lenh truy cap menu SurVPS Script: survps
+Lenh truy cap menu SurVPS Script: sur
 
 Domain chinh: http://$server_name/ hoac http://$server_ip/
 
@@ -861,7 +861,7 @@ Thong tin dang nhap mac dinh cho tat ca tool:
 Username: admin
 Password: $admin_password
 
-Neu can ho tro, cac ban hay truy cap https://survps.com/script/
+Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps/script/
 END
 
 chmod 600 /root/survps-script.txt
@@ -891,7 +891,7 @@ print_message "Thong tin quan ly duoc luu tai: /root/survps-script.txt"
 printf "***Luu y: Port dang nhap SSH da duoc doi tu 22 sang $ssh_port de bao mat VPS\n"
 print_message
 printf "De quan ly server, ban hay dung lenh \"survps\" khi ket noi SSH.\n"
-printf "Neu can ho tro, cac ban hay truy cap https://survps.com/\n"
+printf "Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps/\n"
 print_message
 printf "Server se tu dong khoi dong lai sau 3s nua.... \n\n"
 sleep 3

@@ -5,7 +5,7 @@
 printf "=========================================================================\n"
 printf "                          Tu Dong Sao Luu Data\n"
 printf "=========================================================================\n"
-printf "Vui long doc ky huong dan tai survps.com truoc khi dung tinh nang nay\n\n"
+printf "Vui long doc ky huong dan tai f97.xyz/survps truoc khi dung tinh nang nay\n\n"
 echo -n "Nhap vao ten data ban muon tu dong sao luu roi an [ENTER]: "
 read dataname
 if [ -f /bin/stbackupdb-$dataname ]; then
