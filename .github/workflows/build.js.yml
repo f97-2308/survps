@@ -17,4 +17,4 @@ jobs:
         node-version: '14'
     - run: |
         chmod +x "${GITHUB_WORKSPACE}/.github/build.sh"
-        "${GITHUB_WORKSPACE}/.github/script.sh"
+        "${GITHUB_WORKSPACE}/.github/build.sh"
