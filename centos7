@@ -35,10 +35,10 @@ echo "Tong so CPU core : $cpu_cores"
 echo "Toc do moi core : $cpu_freq MHz"
 echo "Tong dung luong RAM : $server_ram_mb MB"
 echo "Tong dung luong swap : $server_swap_mb MB"
-echo "Tong dung luong o dia : $server_hdd GB"
+echo "Tong dung luong o dia : $server_hdd"
 echo "IP cua server la : $server_ip"
 print_message
-
+sleep 10
 if [ $server_ram_total -lt $low_ram ]; then
     echo -e "Canh bao: dung luong RAM qua thap de cai SurVPS Script \n====> (it nhat 256MB) \nhuy cai dat..."
     exit

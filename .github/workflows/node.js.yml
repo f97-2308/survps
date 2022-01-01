@@ -1,0 +1,33 @@
+name: gh-pages
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: git config --global user.email "huynhduckhoan@gmail.com"
+    - run: git config --global user.name "f97"
+    - run: git clone https://github.com/f97/survps.git -b gh-pages
+    - run: cd survps
+    - run: cp ../README.md .
+    - run: npx github-readme-to-html
+    - run: mv dist/index.html .
+    - run: rm -rf dist/
+    - run: apt install -y zip unzip
+    - run: mkdir survps
+    - run: cp -rf ../*/ survps
+    - run: rm -rf survps/survps
+    - run: cp -rf ../centos7 survps
+    - run: zip -r sur.zip survps/
+    - run: rm -rf survps/
+    - run: git push
