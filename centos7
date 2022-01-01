@@ -14,7 +14,7 @@ print_message() {
         printf "$LINE\n$1\n$LINEs\n"
     fi
 }
-yum -y install gawk bc wget lsof curl
+yum -y install gawk bc wget lsof curl git
 
 clear
 print_message "Chung ta se kiem tra cac thong so VPS cua ban de dua ra cai dat hop ly"
