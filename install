@@ -68,7 +68,7 @@ fi
 
 mkdir -p $ACTION_FOLDER
 cd $ACTION_FOLDER
-wget https://f97.xyz/survps/sur.zip
+wget https://f97.xyz/survps/sur.zip --no-check-certificate
 A | unzip sur.zip
 cp -rf survps/* .
 rm -rf sur.zip 
