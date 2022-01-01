@@ -193,7 +193,7 @@ mkdir -p /var/log/nginx
 chown -R nginx:nginx /var/log/nginx
 chown -R nginx:nginx /var/lib/php/session
 
-cat "$ROOT_FOLDER/html/index.html" >/home/$server_name/public_html/index.html
+cp -rf "$ROOT_FOLDER/html/index.html" > /home/$server_name/public_html/index.html
 
 systemctl start nginx.service
 systemctl start php-fpm.service
@@ -686,37 +686,7 @@ if [ "$1" = "wordpress" ]; then
 fi
 
 clear
-print_message "Bat dau cai dat autossl"
-
-sudo yum install snapd -y
-
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap
-# Install snap core
-sudo snap install core
-sudo snap refresh core
-
-# Install certbot
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-
-echo -n "Nhap vao email dang ky autossl roi an [ENTER]: "
-read email_ssl
-if [ "$email_ssl" = "" ]; then
-    email_ssl="$server_name@yopmail.com"
-    echo "Ban nhap sai, he thong dung $email_ssl lam ten mien chinh"
-fi
-certbot register -m $email_ssl --noninteractive
-
-print_message "Cai dat autossl hoan tat"
-
-
-clear
 print_message "Hoan tat qua trinh cau hinh..."
-# SurVPS Script Admin
-/usr/bin/cp -rf $ROOT_FOLDER/package/administrator/* rm -rf /home/$server_name/private_html/
-printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
-sed -i "s/rootpassword/$mariadb_root_password/g" /home/$server_name/private_html/survps/SQLManager.php
 
 # Server Info
 mkdir /home/$server_name/private_html/serverinfo/
@@ -868,7 +838,6 @@ Lenh truy cap menu SurVPS Script: survps
 
 Domain chinh: http://$server_name/ hoac http://$server_ip/
 
-SurVPS Script Admin: http://$server_name:$admin_port/ hoac http://$server_ip:$admin_port/
 phpMyAdmin:          http://$server_name:$admin_port/phpmyadmin/ hoac http://$server_ip:$admin_port/phpmyadmin/
 Server Info:         http://$server_name:$admin_port/serverinfo/ hoac http://$server_ip:$admin_port/serverinfo/
 PHP OPcache:         http://$server_name:$admin_port/op.php hoac http://$server_ip:$admin_port/op.php

@@ -972,8 +972,9 @@ foreach ($able as $key=>$value) {
     <td width="32%">PHP Info: </td>
     <td width="18%">
 		<?php
-		$phpSelf = $_SERVER[PHP_SELF] ? $_SERVER[PHP_SELF] : $_SERVER[SCRIPT_NAME];
-		$disFuns=get_cfg_var("disable_functions");
+		// fix php 8
+		// $phpSelf = $_SERVER[PHP_SELF] ? $_SERVER[PHP_SELF] : $_SERVER[SCRIPT_NAME];
+		// $disFuns=get_cfg_var("disable_functions");
 		?>
     <?php echo (false!==preg_match("phpinfo",$disFuns))? '<font color="red">×</font>' :"<a href='$phpSelf?act=phpinfo' target='_blank'>PHPINFO</a>";?>
     </td>
