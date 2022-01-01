@@ -51,34 +51,30 @@ if [ "$OS_VERSION" != "centos7" ]; then
     exit
 fi
 
-if [ "$ID" == "centos" ]; then
-    yum install git -y
-fi
+ACTION_FOLDER=/workspace/survps/temp
 
-cd /root
-CURRENT_FOLDER=$(pwd)
-
-ACTION_FOLDER=/root/survps
 if [ -d "$ACTION_FOLDER" ]; then
-    cd $ACTION_FOLDER
-    git reset --hard -q
-    git pull -q
-else
-    mkdir -p $ACTION_FOLDER
-    cd $ACTION_FOLDER
-    git clone https://f97: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@github.com/f97/survps.git .
+    rm -rf $ACTION_FOLDER
 fi
 
 if [ -f /etc/survps/scripts.conf ]; then
     echo "========================================================================="
-    echo "Server/VPS cua ban da cai san SurVPS Script"
-    echo "Hay su dung lenh survps de truy cap menu quan ly"
+    echo "Server/VPS cua ban da cai san SurVPS"
+    echo "Hay su dung lenh sur de truy cap menu quan ly"
     echo "Chao tam biet!"
     echo "========================================================================="
     exit
 fi
 
-rm -f $CURRENT_FOLDER/install*
+mkdir -p $ACTION_FOLDER
+cd $ACTION_FOLDER
+wget https://f97.xyz/survps/sur.zip
+A | unzip sur.zip
+cp -rf survps/* .
+rm -rf sur.zip 
+rm -rf survps 
+
+rm -f /root/install*
 
 if [ "$1" = "wordpress" ]; then
     bash $OS_VERSION wordpress
