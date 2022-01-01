@@ -1,5 +1,5 @@
 ## SurVPS
 
 ```bash
-curl -sO https://f97.xyz/survps/install && bash install
+bash <(curl -s https://f97.xyz/survps/install)
 ```
