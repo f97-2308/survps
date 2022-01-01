@@ -15,19 +15,6 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
-    - run: git config --global user.email "huynhduckhoan@gmail.com"
-    - run: git config --global user.name "f97"
-    - run: git clone https://f97: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@github.com/f97/survps.git 
-    - run: git clone -b gh-pages  https://f97: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@github.com/f97/survps.git gh-pages
-    - run: cp ./survps/README.md ./gh-pages/README.md 
-    - run: cd ./gh-pages
-    - run: npx github-readme-to-html
-    - run: mv dist/index.html .
-    - run: rm -rf dist/
-    - run: sudo apt install -y zip unzip
-    - run: mkdir survps
-    - run: cp -rf ../survps/*/ survps
-    - run: cp -rf ../survps/centos7 survps
-    - run: zip -r sur.zip survps/
-    - run: rm -rf survps/
-    - run: git push
+    - run: |
+        chmod +x "${GITHUB_WORKSPACE}/.github/build.sh"
+        "${GITHUB_WORKSPACE}/.github/script.sh"
