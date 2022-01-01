@@ -845,7 +845,7 @@ clear
 print_message "Cau hinh hoan tat, bat dau them menu survps, nhanh thoi..."
 
 >/bin/survps
-cat $ROOT_FOLDER/survps/survps >/bin/sur && chmod +x /bin/sur
+cat $ROOT_FOLDER/component/survps >/bin/sur && chmod +x /bin/sur
 mkdir -p /etc/survps/menu/
 /usr/bin/cp $ROOT_FOLDER/component/menu/* /etc/survps/menu
 chmod +x /etc/survps/menu/*
@@ -869,7 +869,7 @@ Thong tin dang nhap mac dinh cho tat ca tool:
 Username: admin
 Password: $admin_password
 
-Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps/script/
+Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps
 END
 
 chmod 600 /root/survps-script.txt
@@ -899,7 +899,7 @@ print_message "Thong tin quan ly duoc luu tai: /root/survps-script.txt"
 printf "***Luu y: Port dang nhap SSH da duoc doi tu 22 sang $ssh_port de bao mat VPS\n"
 print_message
 printf "De quan ly server, ban hay dung lenh \"survps\" khi ket noi SSH.\n"
-printf "Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps/\n"
+printf "Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps\n"
 print_message
 printf "Server se tu dong khoi dong lai sau 3s nua.... \n\n"
 sleep 3
