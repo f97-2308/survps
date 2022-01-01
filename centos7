@@ -53,6 +53,13 @@ prompt="Nhap vao lua chon cua ban [1-7]: "
 php_version="80" # Default PHP 8.0
 options=("PHP 8.0" "PHP 7.4" "PHP 7.3" "PHP 7.2" "PHP 7.1" "PHP 7.0" "PHP 5.6")
 select opt in "${options[@]}"; do
+
+    case "$REPLY" in
+    1)
+        php_version="80"
+        break
+        ;;
+    2)
         php_version="74"
         break
         ;;
@@ -87,6 +94,7 @@ select opt in "${options[@]}"; do
     esac
 
 done
+
 
 printf "Nhap vao ten mien chinh (non-www hoac www) roi an [ENTER]: "
 read server_name
