@@ -687,6 +687,9 @@ fi
 
 clear
 print_message "Hoan tat qua trinh cau hinh..."
+# SurVPS Script Admin
+/usr/bin/cp -rf $ROOT_FOLDER/package/administrator/* rm -rf /home/$server_name/private_html/
+printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
 
 # Server Info
 mkdir /home/$server_name/private_html/serverinfo/
@@ -838,6 +841,7 @@ Lenh truy cap menu SurVPS Script: survps
 
 Domain chinh: http://$server_name/ hoac http://$server_ip/
 
+SurVPS Script Admin: http://$server_name:$admin_port/ hoac http://$server_ip:$admin_port/
 phpMyAdmin:          http://$server_name:$admin_port/phpmyadmin/ hoac http://$server_ip:$admin_port/phpmyadmin/
 Server Info:         http://$server_name:$admin_port/serverinfo/ hoac http://$server_ip:$admin_port/serverinfo/
 PHP OPcache:         http://$server_name:$admin_port/op.php hoac http://$server_ip:$admin_port/op.php
