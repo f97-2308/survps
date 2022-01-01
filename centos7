@@ -136,9 +136,9 @@ systemctl stop firewalld
 systemctl disable firewalld
 systemctl mask firewalld
 
-# yum -y remove mysql* php* httpd* sendmail* postfix* rsyslog*
-# yum clean all
-# yum -y update
+yum -y remove mysql* php* httpd* sendmail* postfix* rsyslog*
+yum clean all
+yum -y update
 
 clear
 print_message "Chuan bi xong, bat dau cai dat server..."
