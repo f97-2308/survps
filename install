@@ -51,7 +51,7 @@ if [ "$OS_VERSION" != "centos7" ]; then
     exit
 fi
 
-ACTION_FOLDER=/workspace/survps/temp
+ACTION_FOLDER=/root/survps
 
 if [ -d "$ACTION_FOLDER" ]; then
     rm -rf $ACTION_FOLDER
