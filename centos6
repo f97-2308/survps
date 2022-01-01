@@ -1,12 +1,9 @@
 #!/bin/bash
 #######################################################
-# SurVPS Script v2.0.4 for CentOS 6
+# SurVPS Script v1.0.0 for CentOS 6
 # To install type:
-# curl -sO https://survps.com/install && bash install
-# or
-# curl -sO https://survps.com/scripts/$(rpm -E %centos)/install && bash install
 #######################################################
-survps_version="2.0.4"
+survps_version="1.0.01"
 phpmyadmin_version="4.8.0.1" # Released 2018-04-19. Future version compatible with PHP 5.5 to 7.2 and MySQL 5.5 and newer.
 extplorer_version="2.1.10"
 script_root="https://survps.com/scripts"

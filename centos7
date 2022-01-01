@@ -1,10 +1,6 @@
 #!/bin/bash
 #######################################################
 # SurVPS Script v1.0.0 for CentOS 7
-# To install type:
-# curl -sO https://survps.com/install && bash install
-# or
-# curl -sO https://survps.com/scripts/$(rpm -E %centos)/install && bash install
 #######################################################
 ROOT_FOLDER="$(pwd)"
 survps_version="1.0.0"
@@ -18,7 +14,7 @@ print_message() {
         printf "$LINE\n$1\n$LINEs\n"
     fi
 }
-yum -y install gawk bc wget lsof
+yum -y install gawk bc wget lsof curl
 
 clear
 print_message "Chung ta se kiem tra cac thong so VPS cua ban de dua ra cai dat hop ly"

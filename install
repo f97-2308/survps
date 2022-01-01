@@ -1,8 +1,6 @@
 #!/bin/bash
 #######################################################
-# SurVPS Script Installer v2.1.0
-# To install SurVPS Script type:
-# curl -sO https://survps.com/install && bash install
+# SurVPS Script Installer v1.0.0
 #######################################################
 
 if [ $(id -u) != "0" ]; then
