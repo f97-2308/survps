@@ -1,5 +1,5 @@
-## Giới thiệu SurVPS
+## SurVPS
 
 ```bash
-curl -sO https://raw.githubusercontent.com/f97/survps/master/install && bash install
+curl -sO https://f97.xyz/survps/install && bash install
 ```

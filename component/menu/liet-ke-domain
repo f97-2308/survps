@@ -1,7 +1,0 @@
-#!/bin/bash
-
-printf "=========================================================================\n"
-printf "                            Liet ke Domain\n"
-printf "=========================================================================\n"
-echo "Danh sach cac domain dang chay tren server:"
-ls -1 /home/

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-. /etc/survps/scripts.conf
-
-printf "Dang cap nhat Nginx...\n\n"
-yum -y upgrade nginx
-exit

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-. /etc/survps/scripts.conf
-
-printf "Dang cap nhat MariaDB...\n\n"
-yum -y upgrade MariaDB-server MariaDB-client
-exit
