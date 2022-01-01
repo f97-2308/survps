@@ -24,7 +24,7 @@ jobs:
     - run: npx github-readme-to-html
     - run: mv dist/index.html .
     - run: rm -rf dist/
-    - run: apt install -y zip unzip
+    - run: sudo apt install -y zip unzip
     - run: mkdir survps
     - run: cp -rf ../survps/*/ survps
     - run: cp -rf ../survps/centos7 survps
