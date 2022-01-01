@@ -17,6 +17,8 @@ jobs:
         node-version: '14'
     - run: git config --global user.email "huynhduckhoan@gmail.com"
     - run: git config --global user.name "f97"
+    - run: git clone https://f97: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@github.com/f97/survps.git 
+    - run: cd survps
     - run: git clone https://f97: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@github.com/f97/survps.git -b gh-pages
     - run: cd survps
     - run: cp ../README.md .
