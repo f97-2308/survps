@@ -705,6 +705,22 @@ mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localho
 sed -i "s/\/\/ \$cfg\['Servers'\]\[\$i\]\['controluser'\] = 'pma'/\$cfg\['Servers'\]\[\$i\]\['controluser'\] = 'pma'/" config.inc.php
 sed -i "s/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] = 'pmapass'/\$cfg\['Servers'\]\[\$i\]\['controlpass'\] = '$pmapass'/" config.inc.php
 
+# tinyfilemanager
+TINY_FOLDER=/home/$server_name/private_html/filemanager/
+if [ -d "$TINY_FOLDER" ]; then
+  cd $TINY_FOLDER
+  rm -f config.php
+  git reset --hard -q
+  git pull -q
+else
+  mkdir -p $TINY_FOLDER
+  cd $TINY_FOLDER
+  git clone https://github.com/prasathmani/tinyfilemanager.git .
+fi
+
+cp -rf $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
+sed -i "s/tinyfilemanagersurvpsadmin/$admin_password/g" config.php
+
 # Log Rotation
 cat >"/etc/logrotate.d/nginx" <<END
 /home/*/logs/access.log /home/*/logs/error.log /home/*/logs/nginx_error.log {
@@ -837,6 +853,7 @@ Domain chinh: http://$server_name/ hoac http://$server_ip/
 
 SurVPS Script Admin: http://$server_name:$admin_port/ hoac http://$server_ip:$admin_port/
 phpMyAdmin:          http://$server_name:$admin_port/phpmyadmin/ hoac http://$server_ip:$admin_port/phpmyadmin/
+File Manager:        http://$server_name:$admin_port/filemanager/ hoac http://$server_ip:$admin_port/filemanager/
 Server Info:         http://$server_name:$admin_port/serverinfo/ hoac http://$server_ip:$admin_port/serverinfo/
 PHP OPcache:         http://$server_name:$admin_port/op.php hoac http://$server_ip:$admin_port/op.php
 
@@ -863,6 +880,7 @@ fi
 print_message
 printf "SurVPS Script Admin: http://$server_name:$admin_port/ \n hoac http://$server_ip:$admin_port/\n\n"
 printf "phpMyAdmin: http://$server_name:$admin_port/phpmyadmin/ \n hoac http://$server_ip:$admin_port/phpmyadmin/\n\n"
+printf "File Manager: http://$server_name:$admin_port/filemanager/ \n hoac http://$server_ip:$admin_port/filemanager/\n\n"
 printf "Server Info: http://$server_name:$admin_port/serverinfo/ \n hoac http://$server_ip:$admin_port/serverinfo/\n\n"
 printf "PHP OPcache: http://$server_name:$admin_port/op.php \n hoac http://$server_ip:$admin_port/op.php\n"
 print_message
