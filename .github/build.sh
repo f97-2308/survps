@@ -12,6 +12,6 @@ cp -rf ../survps/*/ survps
 cp -rf ../survps/centos7 survps
 zip -r sur.zip survps/
 rm -rf survps/
-git commit -a --allow-empty-message -m ':zap: action played'
+git commit -a -m ':zap: action running'
 git push
 rm -rf ../*/
