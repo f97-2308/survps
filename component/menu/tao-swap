@@ -13,12 +13,13 @@ if [ "$size" = "" ]; then
     exit
 fi
 
-if -s /swapfile ; then
+sizeG="$(($size * 1024))"
+
+if [ -f "/swapfile" ]; then
   echo "Swap da ton tai"
   exit
 else 
-  swapon -s
-  dd if=/dev/zero of=/swapfile bs=1024 count=$sizek
+  dd if=/dev/zero of=/swapfile bs=1024 count=$sizeG
   mkswap /swapfile
   swapon /swapfile
   swapon -s

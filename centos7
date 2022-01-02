@@ -733,12 +733,13 @@ else
   cd $TINY_FOLDER
   git clone https://github.com/prasathmani/tinyfilemanager.git .
 fi
+
 mv tinyfilemanager.php index.php
-cp -rf $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
-sed -i "s/tinyfilemanagersurvpsadmin/$admin_password/g" config.php
+cp $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
+# sed -i "s/adminpasswd/$admin_password/g" config.php
 
 
-# acme.sh
+# acme.sh ssl installer
 git clone https://github.com/acmesh-official/acme.sh.git /root/acme.sh
 cd /root/acme.sh
 ./acme.sh --install -m $ssl_email
