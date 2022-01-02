@@ -168,9 +168,9 @@ yum-config-manager --enable remi
 
 if [ "$php_version" != "" ]; then
     yum-config-manager --enable remi-php$php_version
-    yum -y install nginx php-fpm php-common php-gd php-mysqlnd php-pdo php-xml php-mbstring php-mcrypt php-curl php-opcache php-cli
+    yum -y install nginx php-zip php-imagick php-fpm php-common php-gd php-mysqlnd php-pdo php-xml php-mbstring php-mcrypt php-curl php-opcache php-cli
 else
-    yum -y install nginx php-fpm php-common php-gd php-mysqlnd php-pdo php-xml php-mbstring php-mcrypt php-curl php-devel php-cli gcc
+    yum -y install nginx php-zip php-imagick php-fpm php-common php-gd php-mysqlnd php-pdo php-xml php-mbstring php-mcrypt php-curl php-devel php-cli gcc
 fi
 
 # Install MariaDB
