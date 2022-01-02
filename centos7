@@ -38,7 +38,7 @@ echo "Tong dung luong swap : $server_swap_mb MB"
 echo "Tong dung luong o dia : $server_hdd"
 echo "IP cua server la : $server_ip"
 print_message
-sleep 10
+
 if [ $server_ram_total -lt $low_ram ]; then
     echo -e "Canh bao: dung luong RAM qua thap de cai SurVPS Script \n====> (it nhat 256MB) \nhuy cai dat..."
     exit
@@ -102,6 +102,15 @@ if [ "$server_name" = "" ]; then
     server_name="f97.xyz"
     echo "Ban nhap sai, he thong dung $server_name lam ten mien chinh"
 fi
+
+
+printf "Nhap dia chi email de dang ky ssl roi an [ENTER]: "
+read ssl_email
+if [ "$ssl_email" = "" ] || [ "$ssl_email" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$ ]; then
+    ssl_email="ssl@$server_name"
+    echo "Ban nhap sai, he thong dung $ssl_email lam email"
+fi
+
 
 ssh_port=26266
 admin_port=$((2001 + RANDOM % 7990))
@@ -724,11 +733,16 @@ else
   cd $TINY_FOLDER
   git clone https://github.com/prasathmani/tinyfilemanager.git .
 fi
-
 mv tinyfilemanager.php index.php
 cp -rf $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
 sed -i "s/tinyfilemanagersurvpsadmin/$admin_password/g" config.php
 
+
+# acme.sh
+git clone https://github.com/acmesh-official/acme.sh.git /root/acme.sh
+cd /root/acme.sh
+./acme.sh --install -m $ssl_email
+  
 # Log Rotation
 cat >"/etc/logrotate.d/nginx" <<END
 /home/*/logs/access.log /home/*/logs/error.log /home/*/logs/nginx_error.log {
@@ -830,10 +844,10 @@ rm -f /root/install
 echo -n "cd /home" >>/root/.bashrc
 
 mkdir -p /etc/survps/
-
 cat >"/etc/survps/scripts.conf" <<END
 survps_version="$survps_version"
 server_name="$server_name"
+ssl_email="$ssl_email"
 server_ip="$server_ip"
 admin_port="$admin_port"
 ssh_port="$ssh_port"
