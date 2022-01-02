@@ -4,7 +4,25 @@
 
 clear
 prompt="Nhap vao lua chon menu cua ban:"
-options=("Liet Ke Domain" "Them Domain" "Xoa Domain" "Sao Luu Code" "Sao Luu Data" "Tu Dong Sao Luu" "Tat Tu Dong Sao Luu" "Tao Database" "Xoa Database" "Doi Pass VPS" "Doi Port Admin" "Them Park Domain" "Them Redirect Domain" "Phan Quyen Webserver" "Nang Cap Server" "Cai Dat SSL") # End Options
+options=(
+    "Liet Ke Domain" 
+    "Them Domain" 
+    "Xoa Domain" 
+    "Sao Luu Code" 
+    "Sao Luu Data" 
+    "Tu Dong Sao Luu" 
+    "Tat Tu Dong Sao Luu" 
+    "Tao Database" 
+    "Xoa Database" 
+    "Doi Pass VPS" 
+    "Doi Port Admin" 
+    "Them Park Domain" 
+    "Them Redirect Domain" 
+    "Phan Quyen Webserver" 
+    "Nang Cap Server" 
+    "Cai Dat SSL"
+    "Tao Swap"
+) # End Options
 
 printf "=========================================================================\n"
 printf "               SurVPS Script $survps_version - http://f97.xyz/survps \n"
@@ -31,6 +49,7 @@ select opt in "${options[@]}" "Thoat"; do
     14) /etc/survps/menu/phan-quyen-webserver ;;
     15) /etc/survps/menu/nang-cap-server ;;
     16) /etc/survps/menu/cai-dat-ssl ;;
+    17) /etc/survps/menu/tao-swap ;;
         # End Menu
 
     $((${#options[@]} + 1)))

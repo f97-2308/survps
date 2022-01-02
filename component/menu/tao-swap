@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# . /etc/survps/scripts.conf
+
+printf "=========================================================================\n"
+printf "                             Cai dat SSL\n"
+printf "=========================================================================\n"
+echo -n "Nhap dung luong swap can tao mb [ENTER]: "
+read size
+
+if [ "$size" = "" ]; then
+    echo "Ban nhap sai, vui long nhap chinh xac"
+    exit
+fi
+
+if -s /swapfile ; then
+  echo "Swap da ton tai"
+  exit
+else 
+  swapon -s
+  dd if=/dev/zero of=/swapfile bs=1024 count=$sizek
+  mkswap /swapfile
+  swapon /swapfile
+  swapon -s
+  echo /swapfile none swap defaults 0 0 >> /etc/fstab
+  chown root:root /swapfile 
+  chmod 0600 /swapfile
+  echo "vm.swappiness = 10" > /etc/sysctl.conf
+  sysctl vm.swappiness=10
+fi
+
