@@ -13,126 +13,9 @@ if [ "$domain" = "" ]; then
     exit
 fi
 
-if [ -f /etc/nginx/conf.d/$domain.conf ]; then
+if [ "$domain" = "$server_name" ]; then
 	mkdir /etc/zerossl/live/$domain -p
 	/root/.acme.sh/acme.sh --issue -d $domain -w /home/$domain/public_html
-  cat >"/etc/nginx/conf.d/$domain.conf" <<END
-server {
-	listen 443 ssl;
-	server_name www.$domain;
-
-	# SSL
-	ssl_certificate /root/.acme.sh/$domain/fullchain.cer;
-	ssl_certificate_key /root/.acme.sh/$domain/$domain.key;
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
-	ssl_prefer_server_ciphers on; 
-	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
-
-	rewrite ^(.*) https://$domain$1 permanent;
-}
-
-server {
-	listen 80;
-	server_name $domain www.$domain;
-	rewrite ^(.*) https://$domain$1 permanent;
-}
-
-server {
-	listen 443 ssl;
-
-	# access_log off;
-	access_log /home/$domain/logs/access.log;
-	# error_log off;
-	error_log /home/$domain/logs/error.log;
-
-	root /home/$domain/public_html;
-	index index.php index.html index.htm;
-	server_name $domain;
-
-	# SSL
-	ssl_certificate /root/.acme.sh/$domain/fullchain.cer;
-	ssl_certificate_key /root/.acme.sh/$domain/$domain.key;
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
-	ssl_prefer_server_ciphers on; 
-	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
-
-	# Improve HTTPS performance with session resumption
-	ssl_session_cache shared:SSL:50m;
-	ssl_session_timeout 1d;
-
-	# DH parameters
-	ssl_dhparam /etc/nginx/ssl/dhparam.pem;
-	# Enable HSTS
-	add_header Strict-Transport-Security "max-age=31536000" always;
-	
-	# Custom configuration
-	include /home/$domain/public_html/*.conf;
-
-	location / {
-		try_files \$uri \$uri/ /index.php?\$args;
-	}
-
-	location ~ \.php$ {
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		include /etc/nginx/fastcgi_params;
-		fastcgi_pass 127.0.0.1:9000;
-		fastcgi_index index.php;
-		fastcgi_connect_timeout 300;
-		fastcgi_send_timeout 300;
-		fastcgi_read_timeout 300;
-		fastcgi_buffer_size 32k;
-		fastcgi_buffers 8 16k;
-		fastcgi_busy_buffers_size 32k;
-		fastcgi_temp_file_write_size 32k;
-		fastcgi_intercept_errors on;
-		fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-	}
-
-	# Disable .htaccess and other hidden files
-	location ~ /\.(?!well-known).* {
-		deny all;
-		access_log off;
-		log_not_found off;
-	}
-
-	location = /favicon.ico {
-		log_not_found off;
-		access_log off;
-	}
-
-	location = /robots.txt {
-		allow all;
-		log_not_found off;
-		access_log off;
-	}
-
-	location ~* \.(3gp|gif|jpg|jpeg|png|ico|wmv|avi|asf|asx|mpg|mpeg|mp4|pls|mp3|mid|wav|swf|flv|exe|zip|tar|rar|gz|tgz|bz2|uha|7z|doc|docx|xls|xlsx|pdf|iso|eot|svg|ttf|woff)$ {
-		gzip_static off;
-		add_header Pragma public;
-		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
-		access_log off;
-		expires 30d;
-		break;
-	}
-
-	location ~* \.(txt|js|css)$ {
-		add_header Pragma public;
-		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
-		access_log off;
-		expires 30d;
-		break;
-	}
-}
-END
-
-  nginx -s reload
-	service nginx restart
-  echo "Upload code len /home/$domain/public_html/"
-  echo "Xem logs cua $domain tai /home/$domain/logs"
-elif [ "$domain" = "$server_name" ]; then
-	mkdir /etc/zerossl/live/$domain -p
-	/root/.acme.sh/acme.sh --issue -d $domain -w /home/$domain/public_html
-		
  cat >"/etc/nginx/conf.d/$domain.conf" <<END
 server {
 	listen 443 ssl;
@@ -147,6 +30,7 @@ server {
 
 	rewrite ^(.*) https://$domain$1 permanent;
 }
+
 server {
 	listen 80;
 	server_name $domain www.$domain;
@@ -304,7 +188,125 @@ END
   echo "Upload code len /home/$domain/public_html/"
   echo "Xem logs cua $domain tai /home/$domain/logs"
 
-else 
+elif [ -f /etc/nginx/conf.d/$domain.conf ]; then
+	mkdir /etc/zerossl/live/$domain -p
+	/root/.acme.sh/acme.sh --issue -d $domain -w /home/$domain/public_html
+  cat >"/etc/nginx/conf.d/$domain.conf" <<END
+server {
+	listen 443 ssl;
+	server_name www.$domain;
+
+	# SSL
+	ssl_certificate /root/.acme.sh/$domain/fullchain.cer;
+	ssl_certificate_key /root/.acme.sh/$domain/$domain.key;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+	ssl_prefer_server_ciphers on; 
+	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+
+	rewrite ^(.*) https://$domain$1 permanent;
+}
+
+server {
+	listen 80;
+	server_name $domain www.$domain;
+	rewrite ^(.*) https://$domain$1 permanent;
+}
+
+server {
+	listen 443 ssl;
+
+	# access_log off;
+	access_log /home/$domain/logs/access.log;
+	# error_log off;
+	error_log /home/$domain/logs/error.log;
+
+	root /home/$domain/public_html;
+	index index.php index.html index.htm;
+	server_name $domain;
+
+	# SSL
+	ssl_certificate /root/.acme.sh/$domain/fullchain.cer;
+	ssl_certificate_key /root/.acme.sh/$domain/$domain.key;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+	ssl_prefer_server_ciphers on; 
+	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+
+	# Improve HTTPS performance with session resumption
+	ssl_session_cache shared:SSL:50m;
+	ssl_session_timeout 1d;
+
+	# DH parameters
+	ssl_dhparam /etc/nginx/ssl/dhparam.pem;
+	# Enable HSTS
+	add_header Strict-Transport-Security "max-age=31536000" always;
+	
+	# Custom configuration
+	include /home/$domain/public_html/*.conf;
+
+	location / {
+		try_files \$uri \$uri/ /index.php?\$args;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		include /etc/nginx/fastcgi_params;
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_connect_timeout 300;
+		fastcgi_send_timeout 300;
+		fastcgi_read_timeout 300;
+		fastcgi_buffer_size 32k;
+		fastcgi_buffers 8 16k;
+		fastcgi_busy_buffers_size 32k;
+		fastcgi_temp_file_write_size 32k;
+		fastcgi_intercept_errors on;
+		fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+	}
+
+	# Disable .htaccess and other hidden files
+	location ~ /\.(?!well-known).* {
+		deny all;
+		access_log off;
+		log_not_found off;
+	}
+
+	location = /favicon.ico {
+		log_not_found off;
+		access_log off;
+	}
+
+	location = /robots.txt {
+		allow all;
+		log_not_found off;
+		access_log off;
+	}
+
+	location ~* \.(3gp|gif|jpg|jpeg|png|ico|wmv|avi|asf|asx|mpg|mpeg|mp4|pls|mp3|mid|wav|swf|flv|exe|zip|tar|rar|gz|tgz|bz2|uha|7z|doc|docx|xls|xlsx|pdf|iso|eot|svg|ttf|woff)$ {
+		gzip_static off;
+		add_header Pragma public;
+		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+		access_log off;
+		expires 30d;
+		break;
+	}
+
+	location ~* \.(txt|js|css)$ {
+		add_header Pragma public;
+		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+		access_log off;
+		expires 30d;
+		break;
+	}
+}
+END
+
+  nginx -s reload
+	service nginx restart
+  echo "Upload code len /home/$domain/public_html/"
+  echo "Xem logs cua $domain tai /home/$domain/logs"
+	
+else
+
   echo "Phat hien $domain khong ton tai tren he thong"
   echo "Chao tam biet...!"
   exit
