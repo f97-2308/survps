@@ -21,7 +21,7 @@ mkdir -p /home/$domain/public_html
 mkdir -p /home/$domain/logs
 chmod 777 /home/$domain/logs
 
-wget -q $script_url/html/index.html -O /home/$domain/public_html/index.html
+yes | cp -rf "/etc/survps/html/index.html" /home/$domain/public_html/index.html
 
 chown nginx:nginx /home/$domain
 chown -R nginx:nginx /home/*/public_html

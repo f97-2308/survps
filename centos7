@@ -221,11 +221,11 @@ if [ "$check_phplowmem" == "1" ]; then
 fi
 
 if [[ "$lessphpmem" = [yY] ]]; then
-    /usr/bin/cp $ROOT_FOLDER/config/php-fpm/php-fpm-min.conf /etc/php-fpm.conf
-    /usr/bin/cp $ROOT_FOLDER/config/php-fpm/www-min.conf /etc/php-fpm.d/www.conf
+    cp $ROOT_FOLDER/config/php-fpm/php-fpm-min.conf /etc/php-fpm.conf
+    cp $ROOT_FOLDER/config/php-fpm/www-min.conf /etc/php-fpm.d/www.conf
 else
-    /usr/bin/cp $ROOT_FOLDER/config/php-fpm/php-fpm.conf /etc/php-fpm.conf
-    /usr/bin/cp $ROOT_FOLDER/config/php-fpm/www.conf /etc/php-fpm.d/www.conf
+    cp $ROOT_FOLDER/config/php-fpm/php-fpm.conf /etc/php-fpm.conf
+    cp $ROOT_FOLDER/config/php-fpm/www.conf /etc/php-fpm.d/www.conf
 fi
 
 min_spare_server=`expr $cpu_cores \* 2`
@@ -609,17 +609,17 @@ systemctl restart nginx.service
 cp /etc/my.cnf /etc/my.cnf-original
 
 if [[ "$(expr $server_ram_total \<= 2099000)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10-min.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10-min.cnf /etc/my.cnf
 elif [[ "$(expr $server_ram_total \> 2100001)" = "1" && "$(expr $server_ram_total \<= 4190000)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10.cnf /etc/my.cnf
 elif [[ "$(expr $server_ram_total \>= 4190001)" = "1" && "$(expr $server_ram_total \<= 8199999)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10-4gb.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10-4gb.cnf /etc/my.cnf
 elif [[ "$(expr $server_ram_total \>= 8200000)" = "1" && "$(expr $server_ram_total \<= 15999999)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10-8gb.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10-8gb.cnf /etc/my.cnf
 elif [[ "$(expr $server_ram_total \>= 16000000)" = "1" && "$(expr $server_ram_total \<= 31999999)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10-16gb.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10-16gb.cnf /etc/my.cnf
 elif [[ "$(expr $server_ram_total \>= 32000000)" = "1" ]]; then
-    /usr/bin/cp /config/mysql/my-mdb10-32gb.cnf /etc/my.cnf
+    cp /config/mysql/my-mdb10-32gb.cnf /etc/my.cnf
 fi
 
 sed -i "s/server_name_here/$server_name/g" /etc/my.cnf
@@ -681,7 +681,7 @@ if [ "$1" = "wordpress" ]; then
     # Download latest WordPress and uncompress
     wget https://wordpress.org/latest.tar.gz
     tar zxf latest.tar.gz
-    mv wordpress/* ./
+    cp wordpress/* ./
 
     # Grab Salt Keys
     wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
@@ -698,12 +698,12 @@ fi
 clear
 print_message "Hoan tat qua trinh cau hinh..."
 # SurVPS Script Admin
-/usr/bin/cp -rf $ROOT_FOLDER/package/administrator/* rm -rf /home/$server_name/private_html/
+cp -rf $ROOT_FOLDER/package/administrator/* rm -rf /home/$server_name/private_html/
 printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
 
 # Server Info
 mkdir /home/$server_name/private_html/serverinfo/
-/usr/bin/cp -rf $ROOT_FOLDER/package/serverinfo.php /home/$server_name/private_html/serverinfo/index.php
+cp -rf $ROOT_FOLDER/package/serverinfo.php /home/$server_name/private_html/serverinfo/index.php
 
 # phpMyAdmin
 mkdir /home/$server_name/private_html/phpmyadmin/
@@ -742,7 +742,10 @@ sed -i "s/tinyfilemanagersurvpsadmin/$admin_password/g" config.php
 git clone https://github.com/acmesh-official/acme.sh.git /root/acme.sh
 cd /root/acme.sh
 ./acme.sh --install -m $ssl_email
-  
+rm -rf /root/acme.sh
+mkdir /etc/nginx/ssl/ -p
+openssl dhparam 2048 -out /etc/nginx/ssl/dhparam.pem
+
 # Log Rotation
 cat >"/etc/logrotate.d/nginx" <<END
 /home/*/logs/access.log /home/*/logs/error.log /home/*/logs/nginx_error.log {
@@ -861,8 +864,11 @@ print_message "Cau hinh hoan tat, bat dau them menu survps, nhanh thoi..."
 >/bin/survps
 cat $ROOT_FOLDER/component/survps >/bin/sur && chmod +x /bin/sur
 mkdir -p /etc/survps/menu/
-/usr/bin/cp $ROOT_FOLDER/component/menu/* /etc/survps/menu
+cp $ROOT_FOLDER/component/menu/* /etc/survps/menu
 chmod +x /etc/survps/menu/*
+mkdir -p /etc/survps/html
+cp $ROOT_FOLDER/html/index.html /etc/survps/html/index.html
+
 
 clear
 cat >"/root/survps-script.txt" <<END
