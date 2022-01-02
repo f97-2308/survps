@@ -9,7 +9,7 @@ printf "Moi khi upload file bang sFTP, ban can phan quyen lai cho Nginx webserve
 printf "o thu muc /home/ de dam bao website hoat dong binh thuong, co the upload,\n"
 printf "cai dat duoc theme/plugin.\n\n"
 
-echo -n "Nhap vao ten mien ban muon phan quyen [ENTER]: "
+echo -n "Nhap vao ten mien ban muon phan quyen, khong nhap gi cho tat car [ENTER]: "
 read domain
 
 if [ "$domain" = "" ]; then
