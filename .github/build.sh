@@ -3,6 +3,7 @@ git config --global user.name "f97"
 git clone https://f97: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@github.com/f97/survps.git 
 git clone -b gh-pages  https://f97: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@github.com/f97/survps.git gh-pages
 cp ./survps/README.md ./gh-pages/README.md 
+cp ./survps/install ./gh-pages/install 
 cd ./gh-pages
 npx github-readme-to-html
 mv dist/index.html .
