@@ -47,7 +47,7 @@ OS_VERSION="$ID$VERSION_ID"
 
 if [ "$OS_VERSION" != "centos7" ]; then
     echo "SurVPS Script is only compatible with CentOS 7"
-    echo "aborting script..."
+    echo "Goodbye!"
     exit
 fi
 
@@ -71,9 +71,8 @@ cd $ACTION_FOLDER
 wget https://f97.xyz/survps/sur.zip --no-check-certificate
 A | unzip sur.zip
 cp -rf survps/* .
-rm -rf sur.zip 
-rm -rf survps 
 
+rm -rf sur* 
 rm -f /root/install*
 
 if [ "$1" = "wordpress" ]; then
