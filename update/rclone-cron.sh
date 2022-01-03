@@ -41,12 +41,12 @@ echo '';
 size=$(du -sh $BACKUP_DIR | awk '{ print $1}')
 
 echo "Starting Uploading Backup";
-/usr/sbin/rclone move $BACKUP_DIR "s3:$SERVER_NAME/$TIMESTAMP" >> /var/log/rclone.log 2>&1
+rclone move $BACKUP_DIR "s3:$SERVER_NAME/$TIMESTAMP" >> /var/log/rclone.log 2>&1
 # Clean up
 rm -rf $BACKUP_DIR
-/usr/sbin/rclone -q --min-age 1w delete "s3:$SERVER_NAME" #Remove all backups older than 1 week
-/usr/sbin/rclone -q --min-age 1w rmdirs "s3:$SERVER_NAME" #Remove all empty folders older than 1 week
-/usr/sbin/rclone cleanup "s3:" #Cleanup Trash
+rclone -q --min-age 1w delete "s3:$SERVER_NAME" #Remove all backups older than 1 week
+rclone -q --min-age 1w rmdirs "s3:$SERVER_NAME" #Remove all empty folders older than 1 week
+rclone cleanup "s3:" #Cleanup Trash
 echo "Finished";
 echo '';
 
