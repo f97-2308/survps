@@ -140,11 +140,11 @@ yum -y install epel-release yum-utils
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 # Install Nginx Repo
-cat "$ROOT_FOLDER/repo/nginx/nginx.repo" >/etc/yum.repos.d/nginx.repo
+cat "$ROOT_FOLDER/config/nginx/nginx.repo" >/etc/yum.repos.d/nginx.repo
 yum-config-manager --enable nginx-mainline
 
 # Install MariaDB Repo 10.6
-cat "$ROOT_FOLDER/repo/mariadb/$(uname -i)/10.6" >/etc/yum.repos.d/MariaDB.repo
+cat "$ROOT_FOLDER/config/mariadb/$(uname -i)/10.6" >/etc/yum.repos.d/MariaDB.repo
 
 systemctl stop saslauthd.service
 systemctl disable saslauthd.service
@@ -204,7 +204,7 @@ mkdir -p /var/log/nginx
 chown -R nginx:nginx /var/log/nginx
 chown -R nginx:nginx /var/lib/php/session
 
-yes | cp -rf "$ROOT_FOLDER/html/index.html" /home/$server_name/public_html/index.html
+yes | cp -rf "$ROOT_FOLDER/services/index.html" /home/$server_name/public_html/index.html
 
 systemctl start nginx.service
 systemctl start php-fpm.service
@@ -699,12 +699,12 @@ fi
 clear
 print_message "Hoan tat qua trinh cau hinh..."
 # SurVPS Script Admin
-cp -rf $ROOT_FOLDER/package/administrator/* rm -rf /home/$server_name/private_html/
+cp -rf $ROOT_FOLDER/services/administrator/* rm -rf /home/$server_name/private_html/
 printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
 
 # Server Info
 mkdir /home/$server_name/private_html/serverinfo/
-cp -rf $ROOT_FOLDER/package/serverinfo.php /home/$server_name/private_html/serverinfo/index.php
+cp -rf $ROOT_FOLDER/services/serverinfo.php /home/$server_name/private_html/serverinfo/index.php
 
 # phpMyAdmin
 mkdir /home/$server_name/private_html/phpmyadmin/
@@ -736,7 +736,7 @@ else
 fi
 
 mv tinyfilemanager.php index.php
-cp $ROOT_FOLDER/package/tinyfilemanager/config.php config.php
+cp $ROOT_FOLDER/services/tinyfilemanager/config.php config.php
 # sed -i "s/adminpasswd/$admin_password/g" config.php
 
 
@@ -864,12 +864,12 @@ clear
 print_message "Cau hinh hoan tat, bat dau them menu survps, nhanh thoi..."
 
 >/bin/survps
-cat $ROOT_FOLDER/component/survps >/bin/sur && chmod +x /bin/sur
+cat $ROOT_FOLDER/src/survps >/bin/sur && chmod +x /bin/sur
 mkdir -p /etc/survps/menu/
-cp $ROOT_FOLDER/component/menu/* /etc/survps/menu
+cp $ROOT_FOLDER/src/menu/* /etc/survps/menu
 chmod +x /etc/survps/menu/*
 mkdir -p /etc/survps/html
-cp $ROOT_FOLDER/html/index.html /etc/survps/html/index.html
+cp $ROOT_FOLDER/services/index.html /etc/survps/html/index.html
 
 
 clear
