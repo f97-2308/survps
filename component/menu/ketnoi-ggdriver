@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. /etc/hocvps/scripts.conf
+
+if [ -f /usr/bin/rclone ]; then
+echo "May chu da cai dat Rclone";
+else
+echo "May chu chua cai dat Rclone, tiep tuc cai dat Rclone"
+printf "=========================================================================\n"
+curl https://rclone.org/install.sh | sudo bash
+fi
+printf "=========================================================================\n"
+clear
+printf "====================================================================================================================================\n"
+echo "         Cau hinh ket noi toi google drive\n"
+printf "====================================================================================================================================\n"
+
+echo "Tham khao bai viet sau de duoc huong dan ket noi google drive: https://news.cloud365.vn/cau-hinh-rclone-ket-noi-voi-google-drive/"
+printf "====================================================================================================================================\n"
+/usr/bin/rclone config

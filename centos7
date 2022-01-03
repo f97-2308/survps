@@ -1,9 +1,9 @@
 #!/bin/bash
 #######################################################
-# SurVPS Script v1.0.0 for CentOS 7
+# SurVPS Script v1.0.1 for CentOS 7
 #######################################################
 ROOT_FOLDER="$(pwd)"
-survps_version="1.0.0"
+survps_version="1.0.1"
 phpmyadmin_version="5.1.1"
 low_ram='262144'
 LINE="========================================================================="
