@@ -1,0 +1,72 @@
+#!/bin/sh
+
+. /etc/survps/scripts.conf
+
+clear
+prompt="Nhap vao lua chon menu cua ban:"
+options=(
+    "Liet Ke Domain" 
+    "Them Domain" 
+    "Xoa Domain" 
+    "Sao Luu Code" 
+    "Sao Luu Data" 
+    "Tu Dong Sao Luu" 
+    "Tat Tu Dong Sao Luu" 
+    "Tao Database" 
+    "Xoa Database" 
+    "Doi Pass VPS" 
+    "Doi Port Admin" 
+    "Them Park Domain" 
+    "Them Redirect Domain" 
+    "Phan Quyen Webserver" 
+    "Nang Cap Server" 
+    "Cai Dat SSL"
+    "Tao Swap"
+    "Rclone"
+) # End Options
+
+printf "=========================================================================\n"
+printf "               SurVPS Script $survps_version - http://f97.xyz/survps \n"
+printf "=========================================================================\n"
+printf "                             SurVPS Menu\n"
+printf "=========================================================================\n"
+
+select opt in "${options[@]}" "Thoat"; do
+
+    case "$REPLY" in
+    1) /etc/survps/menu/liet-ke-domain ;;
+    2) /etc/survps/menu/them-domain ;;
+    3) /etc/survps/menu/xoa-domain ;;
+    4) /etc/survps/menu/sao-luu-code ;;
+    5) /etc/survps/menu/sao-luu-data ;;
+    6) /etc/survps/menu/tu-dong-sao-luu ;;
+    7) /etc/survps/menu/tat-tu-dong-sao-luu ;;
+    8) /etc/survps/menu/tao-database ;;
+    9) /etc/survps/menu/xoa-database ;;
+    10) /etc/survps/menu/doi-pass-vps ;;
+    11) /etc/survps/menu/doi-port-admin ;;
+    12) /etc/survps/menu/park-domain ;;
+    13) /etc/survps/menu/forward-domain ;;
+    14) /etc/survps/menu/phan-quyen-webserver ;;
+    15) /etc/survps/menu/nang-cap-server ;;
+    16) /etc/survps/menu/cai-dat-ssl ;;
+    17) /etc/survps/menu/tao-swap ;;
+    18) /etc/hocvps/menu/rclone ;;
+        # End Menu
+
+    $((${#options[@]} + 1)))
+        printf "\nChao tam biet!\nHen gap lai ban o http://f97.xyz/survps\n\n"
+        break
+        ;;
+    0)
+        printf "\nChao tam biet!\nHen gap lai ban o http://f97.xyz/survps\n\n"
+        break
+        ;;
+    *)
+        echo "Ban nhap sai, vui long nhap theo so thu tu tren danh sach"
+        continue
+        ;;
+
+    esac
+
+done
