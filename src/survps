@@ -51,7 +51,7 @@ select opt in "${options[@]}" "Thoat"; do
     15) /etc/survps/menu/nang-cap-server ;;
     16) /etc/survps/menu/cai-dat-ssl ;;
     17) /etc/survps/menu/tao-swap ;;
-    18) /etc/hocvps/menu/rclone ;;
+    18) /etc/survps/menu/rclone ;;
         # End Menu
 
     $((${#options[@]} + 1)))
