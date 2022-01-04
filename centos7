@@ -114,7 +114,7 @@ fi
 printf "Ban co muon cai redis khong? (Y/N) [ENTER]: "
 read is_redis
 
-if [[ ! ($is_redis == "Y" || $is_redis == "y" || $is_redis == "N" || $is_redis == "n") ]] ; then
+if [[ ! ("$is_redis" == "Y" || "$is_redis" == "y" || "$is_redis" == "N" || "$is_redis" == "n") ]] ; then
     is_redis="N"
     echo "Ban nhap sai, he thong se khong cai dat redis"
 fi
@@ -155,7 +155,7 @@ yum-config-manager --enable nginx-mainline
 cat "$ROOT_FOLDER/config/mariadb/$(uname -i)/10.6" >/etc/yum.repos.d/MariaDB.repo
 
 # Install Redis repo
-if [ "$is_redis" == "Y" ] ; then
+if [[ ("$is_redis" == "Y" || "$is_redis" == "y") ]] ; then
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 fi
 
@@ -188,7 +188,7 @@ yum -y install nginx php-zip php-imagick php-fpm php-common php-gd php-mysqlnd p
 yum -y install MariaDB-server MariaDB-client
 
 # Install Redis
-if [ "$is_redis" == "Y" ] ; then
+if [[ ("$is_redis" == "Y" || "$is_redis" == "y") ]] ; then
     yum install redis php-pecl-redis -y 
     chkconfig redis on
     service redis start
