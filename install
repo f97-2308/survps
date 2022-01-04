@@ -66,6 +66,7 @@ if [ -f /etc/survps/scripts.conf ]; then
     exit
 fi
 
+yum install wget yum -y
 mkdir -p $ACTION_FOLDER
 cd $ACTION_FOLDER
 wget https://f97.xyz/survps/sur.zip --no-check-certificate
