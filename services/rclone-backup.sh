@@ -1,5 +1,3 @@
-# SurVPS Script Plugin - Backup Server and Upload to Cloud
-
 #!/bin/bash
 
 SERVER_NAME=$(curl -s  ifconfig.me)
@@ -13,7 +11,7 @@ SECONDS=0
 mkdir -p "$BACKUP_DIR/mysql"
 
 echo "Starting Backup Database";
-databases=`$MYSQL -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema|performance_schema|mysql)"`
+databases=`$MYSQL -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema|performance_schema|mysql|sys)"`
 
 for db in $databases; do
 	$MYSQLDUMP --force --opt $db | gzip > "$BACKUP_DIR/mysql/$db.gz"
@@ -27,7 +25,8 @@ for D in /home/*; do
 	if [ -d "${D}" ]; then #If a directory
 		domain=${D##*/} # Domain name
 		echo "- "$domain;
-		zip -r $BACKUP_DIR/$domain.zip /home/$domain/public_html/ -q -x /home/$domain/public_html/wp-content/cache/**\* #Exclude cache
+		cd /home/$domain/public_html/
+		zip -r $BACKUP_DIR/$domain.zip . -q -x wp-content/cache/**\* #Exclude cache
 	fi
 done
 echo "Finished";
@@ -35,6 +34,7 @@ echo '';
 
 echo "Starting Backup Nginx Configuration";
 cp -r /etc/nginx/conf.d/ $BACKUP_DIR/nginx/
+rm -f $BACKUP_DIR/nginx/default.conf
 echo "Finished";
 echo '';
 
