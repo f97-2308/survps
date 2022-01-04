@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /etc/hocvps/scripts.conf
+. /etc/survps/scripts.conf
 
 prompt="Nhap vao lua chon cua ban: "
 
@@ -13,9 +13,9 @@ $prompt"
 select opt in "${options[@]}" "Thoat"; do 
 
     case "$REPLY" in
-            1 ) /etc/hocvps/menu/ketnoi-ggdriver;;
-            2 ) /etc/hocvps/menu/backup-source;;
-	        3 ) /etc/hocvps/menu/backup-database;;
+            1 ) /etc/survps/menu/ketnoi-ggdriver;;
+            2 ) /etc/survps/menu/backup-source;;
+	        3 ) /etc/survps/menu/backup-database;;
 
             $(( ${#options[@]}+1 )) ) printf "\nChao tam biet....!\n"; break;;
             *) echo "Ban nhap sai, vui long nhap theo so thu tu tren danh sach";continue;;

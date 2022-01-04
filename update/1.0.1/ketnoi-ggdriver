@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /etc/hocvps/scripts.conf
+. /etc/survps/scripts.conf
 
 if [ -f /usr/bin/rclone ]; then
 echo "May chu da cai dat Rclone";
