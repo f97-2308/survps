@@ -22,7 +22,7 @@ options=(
     "Nang Cap Server" 
     "Cai Dat SSL"
     "Tao Swap"
-    "Rclone"
+    "Google Drive"
 ) # End Options
 
 printf "=========================================================================\n"
