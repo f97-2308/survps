@@ -691,7 +691,7 @@ clear
 print_message "Hoan tat qua trinh cau hinh..."
 
 # SurVPS Script Admin
-# cp -rf $ROOT_FOLDER/services/administrator/* /home/$server_name/private_html/
+cp -rf $ROOT_FOLDER/services/administrator/* /home/$server_name/private_html/
 printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
 
 # Server Info
