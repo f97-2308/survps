@@ -15,19 +15,18 @@ fi
 
 if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   echo "Cai dat WordPress to $domain..."
-  username="${domain//./_}"
+  username="sql_${domain//./_}"
   password=$(date | md5sum | cut -c '1-15')
   secure_table_prefix=$(date | md5sum | cut -c '1-4')
   cd /home/$domain/public_html/
   rm -rf *
-  rm -rf .*
   # Generate wordpress database
   mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username.* TO wordpress@domain IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
 
-  # Download latest WordPress and uncompress
-  wget https://wordpress.org/latest.tar.gz
-  tar zxf latest.tar.gz
-  cp wordpress/* ./
+  # Download latest WordPress and uncompress    
+  wget https://wordpress.org/latest.zip
+  unzip -x latest.zip
+  mv wordpress/* .
 
   # Grab Salt Keys
   wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
