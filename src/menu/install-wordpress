@@ -3,9 +3,9 @@
 . /etc/survps/scripts.conf
 
 printf "=========================================================================\n"
-printf "                             Cai dat SSL\n"
+printf "                             Cai dat wordpress\n"
 printf "=========================================================================\n"
-echo -n "Nhap vao domain ban muon them ssl roi an [ENTER]: "
+echo -n "Nhap vao domain ban muon them wordpress roi an [ENTER]: "
 read domain
 
 if [ "$domain" = "" ]; then
@@ -15,19 +15,18 @@ fi
 
 if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   echo "Cai dat WordPress to $domain..."
-  username="${domain//./_}"
+  username="sql_${domain//./_}"
   password=$(date | md5sum | cut -c '1-15')
   secure_table_prefix=$(date | md5sum | cut -c '1-4')
   cd /home/$domain/public_html/
   rm -rf *
-  rm -rf .*
   # Generate wordpress database
-  mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username.* TO wordpress@domain IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
+  mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username . * TO '$username'@'localhost' IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
 
-  # Download latest WordPress and uncompress
-  wget https://wordpress.org/latest.tar.gz
-  tar zxf latest.tar.gz
-  cp wordpress/* ./
+  # Download latest WordPress and uncompress    
+  wget https://wordpress.org/latest.zip
+  unzip -x latest.zip
+  mv wordpress/* .
 
   # Grab Salt Keys
   wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
@@ -38,7 +37,7 @@ if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   sed -i "/#@+/,/#@-/d" wp-config.php
 
   # Cleanup
-  rm -rf wordpress latest.tar.gz /tmp/wp.keys wp wp-config-sample.php
+  rm -rf wordpress latest.zip /tmp/wp.keys wp wp-config-sample.php
 
   # Chmod
   chown -R nginx:nginx /home/$domain/public_html
