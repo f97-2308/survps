@@ -21,7 +21,7 @@ if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   cd /home/$domain/public_html/
   rm -rf *
   # Generate wordpress database
-  mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username.* TO wordpress@domain IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
+  mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username . * TO '$username'@'localhost' IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
 
   # Download latest WordPress and uncompress    
   wget https://wordpress.org/latest.zip
