@@ -1,0 +1,53 @@
+#!/bin/bash
+
+. /etc/survps/scripts.conf
+
+printf "=========================================================================\n"
+printf "                             Cai dat SSL\n"
+printf "=========================================================================\n"
+echo -n "Nhap vao domain ban muon them ssl roi an [ENTER]: "
+read domain
+
+if [ "$domain" = "" ]; then
+    echo "Ban nhap sai, vui long nhap chinh xac"
+    exit
+fi
+
+# if [ -f /etc/nginx/conf.d/$domain.conf ]; then
+  echo "Cai dat WordPress to $domain..."
+  username="${domain//./_}"
+  password=$(date | md5sum | cut -c '1-15')
+  secure_table_prefix=$(date | md5sum | cut -c '1-4')
+  cd /home/$domain/public_html/
+  rm -f index.html
+  # Generate wordpress database
+  mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE $username;GRANT ALL PRIVILEGES ON $username.* TO wordpress@domain IDENTIFIED BY '$password';FLUSH PRIVILEGES;"
+
+  # Download latest WordPress and uncompress
+  wget https://wordpress.org/latest.tar.gz
+  tar zxf latest.tar.gz
+  cp wordpress/* ./
+
+  # Grab Salt Keys
+  wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
+
+  # Butcher our wp-config.php file
+  sed -e "s/database_name_here/$username/" -e "s/username_here/$username/" -e "s/password_here/"$password"/" -e "s/wp_/wp_"$secure_table_prefix"_/" wp-config-sample.php >wp-config.php
+  sed -i '/#@-/r /tmp/wp.keys' wp-config.php
+  sed -i "/#@+/,/#@-/d" wp-config.php
+
+  # Cleanup
+  rm -rf wordpress latest.tar.gz /tmp/wp.keys wp wp-config-sample.php
+
+  # Chmod
+  chown -R nginx:nginx /home/$domain/public_html
+
+  echo "Hoan tat qua trinh cai dat SurVPS Script + WordPress!"
+  echo "Xem logs cua $domain tai /home/$domain/logs"
+  echo "Tiep theo ban hay truy cap http://$domain \n de cau hinh WordPress"
+
+else
+  echo "Phat hien $domain khong ton tai tren he thong"
+  echo "Chao tam biet...!"
+  exit
+fi

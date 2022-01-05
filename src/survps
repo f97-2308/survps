@@ -22,7 +22,8 @@ options=(
     "Nang Cap Server" 
     "Cai Dat SSL"
     "Tao Swap"
-    "Google Drive"
+    "Google Drive",
+    "Install Wordpress",
 ) # End Options
 
 printf "=========================================================================\n"
@@ -53,6 +54,7 @@ select opt in "${options[@]}" "Thoat"; do
     15) /etc/survps/menu/tao-swap ;;
     16) /etc/survps/menu/rclone ;;
     17) /etc/survps/menu/show-info ;;
+    18) /etc/survps/menu/install-wordpress ;;
         # End Menu
 
     $((${#options[@]} + 1)))

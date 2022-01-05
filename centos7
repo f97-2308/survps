@@ -687,33 +687,6 @@ mysql mysql <$ROOT_FOLDER/config/mysql/mariadb10_3tables.sql
 systemctl restart mysql.service
 mysql_upgrade --force mysql
 
-if [ "$1" = "wordpress" ]; then
-    clear
-    print_message "Cai dat WordPress..."
-    cd /home/$server_name/public_html/
-    rm -f index.html
-    # Generate wordpress database
-    wordpress_password=$(date | md5sum | cut -c '1-15')
-    secure_table_prefix=$(date | md5sum | cut -c '1-5')
-    mysql -u root -p"$mariadb_root_password" -e "CREATE DATABASE wordpress;GRANT ALL PRIVILEGES ON wordpress.* TO wordpress@localhost IDENTIFIED BY '$wordpress_password';FLUSH PRIVILEGES;"
-
-    # Download latest WordPress and uncompress
-    wget https://wordpress.org/latest.tar.gz
-    tar zxf latest.tar.gz
-    cp wordpress/* ./
-
-    # Grab Salt Keys
-    wget -O /tmp/wp.keys https://api.wordpress.org/secret-key/1.1/salt/
-
-    # Butcher our wp-config.php file
-    sed -e "s/database_name_here/wordpress/" -e "s/username_here/wordpress/" -e "s/password_here/"$wordpress_password"/" -e "s/wp_/wp_"$secure_table_prefix"_/" wp-config-sample.php >wp-config.php
-    sed -i '/#@-/r /tmp/wp.keys' wp-config.php
-    sed -i "/#@+/,/#@-/d" wp-config.php
-
-    # Tidy up
-    rm -rf wordpress latest.tar.gz /tmp/wp.keys wp wp-config-sample.php
-fi
-
 clear
 print_message "Hoan tat qua trinh cau hinh..."
 # SurVPS Script Admin
@@ -914,16 +887,12 @@ END
 
 chmod 600 /etc/survps/.survps-info.txt
 
-if [ "$1" = "wordpress" ]; then
-    print_message "Hoan tat qua trinh cai dat SurVPS Script + WordPress!"
-    printf "Tiep theo ban hay truy cap http://$server_name \n hoac http://$server_ip de cau hinh WordPress \n"
-else
-    print_message "Scripts SurVPS da hoan tat qua trinh cai dat..."
-    printf "Sau day la thong tin server moi cua ban, hay doc can than va luu giu lai\n"
-    printf "de su dung sau nay:\n\n"
-    print_message
-    printf "Domain chinh: http://$server_name/ hoac http://$server_ip/\n"
-fi
+
+print_message "Scripts SurVPS da hoan tat qua trinh cai dat..."
+printf "Sau day la thong tin server moi cua ban, hay doc can than va luu giu lai\n"
+printf "de su dung sau nay:\n\n"
+print_message
+printf "Domain chinh: http://$server_name/ hoac http://$server_ip/\n"
 
 print_message
 printf "SurVPS Script Admin: http://$server_name:$admin_port/ \n hoac http://$server_ip:$admin_port/\n\n"

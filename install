@@ -76,8 +76,4 @@ cp -rf survps/* .
 rm -rf sur* 
 rm -f /root/install*
 
-if [ "$1" = "wordpress" ]; then
-    bash $OS_VERSION wordpress
-else
-    bash $OS_VERSION
-fi
+bash $OS_VERSION
