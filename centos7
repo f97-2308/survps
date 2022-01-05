@@ -120,7 +120,8 @@ fi
 
 
 ssh_port=26266
-admin_port=$((2001 + RANDOM % 7990))
+# admin_port=$((2001 + RANDOM % 7990))
+admin_port=2308
 while [ $admin_port = $ssh_port ]; do
     admin_port=$((2001 + RANDOM % 7990))
 done

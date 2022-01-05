@@ -16,8 +16,8 @@ options=(
     "Xoa Database" 
     "Doi Pass VPS" 
     "Doi Port Admin" 
-    "Them Park Domain" 
-    "Them Redirect Domain" 
+    # "Them Park Domain" 
+    # "Them Redirect Domain" 
     "Phan Quyen Webserver" 
     "Nang Cap Server" 
     "Cai Dat SSL"
@@ -45,13 +45,13 @@ select opt in "${options[@]}" "Thoat"; do
     9) /etc/survps/menu/xoa-database ;;
     10) /etc/survps/menu/doi-pass-vps ;;
     11) /etc/survps/menu/doi-port-admin ;;
-    12) /etc/survps/menu/park-domain ;;
-    13) /etc/survps/menu/forward-domain ;;
-    14) /etc/survps/menu/phan-quyen-webserver ;;
-    15) /etc/survps/menu/nang-cap-server ;;
-    16) /etc/survps/menu/cai-dat-ssl ;;
-    17) /etc/survps/menu/tao-swap ;;
-    18) /etc/survps/menu/rclone ;;
+    # 12) /etc/survps/menu/park-domain ;;
+    # 13) /etc/survps/menu/forward-domain ;;
+    12) /etc/survps/menu/phan-quyen-webserver ;;
+    13) /etc/survps/menu/nang-cap-server ;;
+    14) /etc/survps/menu/cai-dat-ssl ;;
+    15) /etc/survps/menu/tao-swap ;;
+    16) /etc/survps/menu/rclone ;;
         # End Menu
 
     $((${#options[@]} + 1)))
