@@ -837,7 +837,7 @@ chown nginx:nginx /home/$server_name
 chown -R nginx:nginx /home/*/public_html
 chown -R nginx:nginx /home/*/private_html
 
-rm -f /root/*
+rm -rf /root/*
 # echo -n "cd /home" >>/root/.bashrc
 
 mkdir -p /etc/survps/
