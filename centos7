@@ -837,9 +837,6 @@ chown nginx:nginx /home/$server_name
 chown -R nginx:nginx /home/*/public_html
 chown -R nginx:nginx /home/*/private_html
 
-rm -rf /root/*
-# echo -n "cd /home" >>/root/.bashrc
-
 mkdir -p /etc/survps/
 cat >"/etc/survps/scripts.conf" <<END
 survps_version="$survps_version"
@@ -888,6 +885,8 @@ END
 
 chmod 600 /etc/survps/.survps-info.txt
 
+rm -f /root/*
+# echo -n "cd /home" >>/root/.bashrc
 
 print_message "Scripts SurVPS da hoan tat qua trinh cai dat..."
 printf "Sau day la thong tin server moi cua ban, hay doc can than va luu giu lai\n"
