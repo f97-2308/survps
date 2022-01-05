@@ -22,8 +22,9 @@ options=(
     "Nang Cap Server" 
     "Cai Dat SSL"
     "Tao Swap"
-    "Google Drive",
-    "Install Wordpress",
+    "Google Drive"
+    "Xem info"
+    "Install Wordpress"
 ) # End Options
 
 printf "=========================================================================\n"
@@ -68,8 +69,8 @@ select opt in "${options[@]}" "Thoat"; do
     *)
         echo "Ban nhap sai, vui long nhap theo so thu tu tren danh sach"
         clear
+        break
         sur
-        continue
         ;;
 
     esac
