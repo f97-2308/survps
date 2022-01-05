@@ -3,9 +3,9 @@
 . /etc/survps/scripts.conf
 
 printf "=========================================================================\n"
-printf "                             Cai dat SSL\n"
+printf "                             Cai dat wordpress\n"
 printf "=========================================================================\n"
-echo -n "Nhap vao domain ban muon them ssl roi an [ENTER]: "
+echo -n "Nhap vao domain ban muon them wordpress roi an [ENTER]: "
 read domain
 
 if [ "$domain" = "" ]; then
