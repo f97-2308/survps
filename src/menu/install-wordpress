@@ -13,7 +13,7 @@ if [ "$domain" = "" ]; then
     exit
 fi
 
-# if [ -f /etc/nginx/conf.d/$domain.conf ]; then
+if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   echo "Cai dat WordPress to $domain..."
   username="${domain//./_}"
   password=$(date | md5sum | cut -c '1-15')
