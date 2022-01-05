@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. /etc/survps/scripts.conf
+
+# printf "=========================================================================\n"
+# printf "                             Thong tin VPS\n"
+# printf "=========================================================================\n"
+
+cat /etc/survps/.survps-info.txt

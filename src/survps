@@ -49,9 +49,10 @@ select opt in "${options[@]}" "Thoat"; do
     # 13) /etc/survps/menu/forward-domain ;;
     12) /etc/survps/menu/phan-quyen-webserver ;;
     13) /etc/survps/menu/nang-cap-server ;;
-    14) /etc/survps/menu/cai-dat-ssl ;;
+    14) /etc/survps/menu/install-ssl ;;
     15) /etc/survps/menu/tao-swap ;;
     16) /etc/survps/menu/rclone ;;
+    17) /etc/survps/menu/show-info ;;
         # End Menu
 
     $((${#options[@]} + 1)))
@@ -64,6 +65,8 @@ select opt in "${options[@]}" "Thoat"; do
         ;;
     *)
         echo "Ban nhap sai, vui long nhap theo so thu tu tren danh sach"
+        clear
+        sur
         continue
         ;;
 

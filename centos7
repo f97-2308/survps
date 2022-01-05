@@ -891,7 +891,7 @@ cp $ROOT_FOLDER/services/index.html /etc/survps/html/index.html
 
 
 clear
-cat >"/root/survps-script.txt" <<END
+cat >"/etc/survps/.survps-info.txt" <<END
 =========================================================================
                         MANAGE VPS INFORMATION
 =========================================================================
@@ -912,7 +912,7 @@ Password: $admin_password
 Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps
 END
 
-chmod 600 /root/survps-script.txt
+chmod 600 /etc/survps/.survps-info.txt
 
 if [ "$1" = "wordpress" ]; then
     print_message "Hoan tat qua trinh cai dat SurVPS Script + WordPress!"
@@ -935,7 +935,7 @@ print_message
 printf "Thong tin dang nhap mac dinh cho tat ca tool:\n"
 printf " Username: admin\n"
 printf " Password: $admin_password\n"
-print_message "Thong tin quan ly duoc luu tai: /root/survps-script.txt"
+print_message "Thong tin quan ly duoc luu tai: /etc/survps/.survps-info.txt"
 printf "***Luu y: Port dang nhap SSH da duoc doi tu 22 sang $ssh_port de bao mat VPS\n"
 print_message
 printf "De quan ly server, ban hay dung lenh \"survps\" khi ket noi SSH.\n"

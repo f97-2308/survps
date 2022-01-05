@@ -19,8 +19,8 @@ case $response in [yY][eE][sS] | [yY])
     sed -i "s/port=$admin_port/port=$new_admin_port/g" /etc/fail2ban/jail.local
     sed -i "s/admin_port=\"$admin_port\"/admin_port=\"$new_admin_port\"/g" /etc/survps/scripts.conf
 
-    if [ -f /root/survps-script.txt ]; then
-        sed -i "s/:$admin_port\//:$new_admin_port\//g" /root/survps-script.txt
+    if [ -f /etc/survps/.survps-info.txt ]; then
+        sed -i "s/:$admin_port\//:$new_admin_port\//g" /etc/survps/.survps-info.txt
     fi
 
     # Open port
