@@ -115,7 +115,6 @@ printf "Ban co muon cai redis khong? (Y/N) [ENTER]: "
 read is_redis
 
 if [[ ! ("$is_redis" == "Y" || "$is_redis" == "y" || "$is_redis" == "N" || "$is_redis" == "n") ]] ; then
-    is_redis="N"
     echo "Ban nhap sai, he thong se khong cai dat redis"
 fi
 
