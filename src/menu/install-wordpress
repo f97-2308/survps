@@ -37,7 +37,7 @@ if [ -f /etc/nginx/conf.d/$domain.conf ]; then
   sed -i "/#@+/,/#@-/d" wp-config.php
 
   # Cleanup
-  rm -rf wordpress latest.tar.gz /tmp/wp.keys wp wp-config-sample.php
+  rm -rf wordpress latest.zip /tmp/wp.keys wp wp-config-sample.php
 
   # Chmod
   chown -R nginx:nginx /home/$domain/public_html
