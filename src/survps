@@ -28,7 +28,7 @@ options=(
 ) # End Options
 
 printf "=========================================================================\n"
-printf "               SurVPS Script $survps_version - http://f97.xyz/survps \n"
+printf "               SurVPS Script $survps_version - https://f97.xyz/survps \n"
 printf "=========================================================================\n"
 printf "                             SurVPS Menu\n"
 printf "=========================================================================\n"
@@ -59,11 +59,11 @@ select opt in "${options[@]}" "Thoat"; do
         # End Menu
 
     $((${#options[@]} + 1)))
-        printf "\nChao tam biet!\nHen gap lai ban o http://f97.xyz/survps\n\n"
+        printf "\nChao tam biet!\nHen gap lai ban o https://f97.xyz/survps\n\n"
         break
         ;;
     0)
-        printf "\nChao tam biet!\nHen gap lai ban o http://f97.xyz/survps\n\n"
+        printf "\nChao tam biet!\nHen gap lai ban o https://f97.xyz/survps\n\n"
         break
         ;;
     *)
