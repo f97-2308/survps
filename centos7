@@ -689,8 +689,9 @@ mysql_upgrade --force mysql
 
 clear
 print_message "Hoan tat qua trinh cau hinh..."
+
 # SurVPS Script Admin
-cp -rf $ROOT_FOLDER/services/administrator/* rm -rf /home/$server_name/private_html/
+# cp -rf $ROOT_FOLDER/services/administrator/* /home/$server_name/private_html/
 printf "admin:$(openssl passwd -apr1 $admin_password)\n" >/home/$server_name/private_html/survps/.htpasswd
 
 # Server Info
@@ -836,8 +837,8 @@ chown nginx:nginx /home/$server_name
 chown -R nginx:nginx /home/*/public_html
 chown -R nginx:nginx /home/*/private_html
 
-rm -f /root/install
-echo -n "cd /home" >>/root/.bashrc
+rm -f /root/*
+# echo -n "cd /home" >>/root/.bashrc
 
 mkdir -p /etc/survps/
 cat >"/etc/survps/scripts.conf" <<END
