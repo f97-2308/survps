@@ -38,6 +38,7 @@ if [ -f /etc/nginx/conf.d/$domain.conf ]; then
 
   # Cleanup
   rm -rf wordpress latest.zip /tmp/wp.keys wp wp-config-sample.php
+  rm -rf wp-content/themes/twenty* wp-content/plugins/akismet wp-content/plugins/hello.php
 
   # Chmod
   chown -R nginx:nginx /home/$domain/public_html
