@@ -120,8 +120,10 @@ fi
 
 
 ssh_port=26266
+default_ssh_port=$(cat /etc/ssh/sshd_config | grep 'Port '|awk '{print $2}')
 # admin_port=$((2001 + RANDOM % 7990))
 admin_port=2308
+
 while [ $admin_port = $ssh_port ]; do
     admin_port=$((2001 + RANDOM % 7990))
 done
@@ -797,7 +799,7 @@ cat >"/etc/logrotate.d/mysql" <<END
 END
 
 # Change port SSH
-sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config
+sed -i "s/#Port $default_ssh_port/Port $ssh_port/g" /etc/ssh/sshd_config
 
 cat >"/etc/fail2ban/jail.local" <<END
 [sshd]
@@ -905,7 +907,7 @@ printf "Thong tin dang nhap mac dinh cho tat ca tool:\n"
 printf " Username: admin\n"
 printf " Password: $admin_password\n"
 print_message "Thong tin quan ly duoc luu tai: /etc/survps/.survps-info.txt"
-printf "***Luu y: Port dang nhap SSH da duoc doi tu 22 sang $ssh_port de bao mat VPS\n"
+printf "***Luu y: Port dang nhap SSH da duoc doi tu $default_ssh_port sang $ssh_port de bao mat VPS\n"
 print_message
 printf "De quan ly server, ban hay dung lenh \"survps\" khi ket noi SSH.\n"
 printf "Neu can ho tro, cac ban hay truy cap https://f97.xyz/survps\n"
