@@ -45,8 +45,8 @@ select opt in "${options[@]}" "Thoat"; do
     7) /etc/survps/menu/tat-tu-dong-sao-luu ;;
     8) /etc/survps/menu/tao-database ;;
     9) /etc/survps/menu/xoa-database ;;
-    10) /etc/survps/menu/doi-pass-vps ;;
-    11) /etc/survps/menu/doi-port-admin ;;
+    10) /etc/survps/menu/change-pass-vps ;;
+    11) /etc/survps/menu/change-port-admin ;;
     # 12) /etc/survps/menu/park-domain ;;
     # 13) /etc/survps/menu/forward-domain ;;
     12) /etc/survps/menu/phan-quyen-webserver ;;
