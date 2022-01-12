@@ -17,5 +17,4 @@ jobs:
         node-version: '14'
       env:
         F97_TOKEN: ${{ secrets.F97_TOKEN }}
-    - run: |
-        "bash ${GITHUB_WORKSPACE}/.github/build.sh ${F97_TOKEN}"
+    - run: bash ${GITHUB_WORKSPACE}/.github/build.sh ${{ secrets.F97_TOKEN }}
