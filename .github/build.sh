@@ -1,5 +1,4 @@
 #!/bin/bash
-
 git config --global user.email "huynhduckhoan@gmail.com"
 git config --global user.name "f97"
 mkdir ./temp 
