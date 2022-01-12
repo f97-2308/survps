@@ -18,5 +18,4 @@ jobs:
       env:
         F97_TOKEN: ${{ secrets.F97_TOKEN }}
     - run: |
-        chmod +x "${GITHUB_WORKSPACE}/.github/build.sh"
-        "${GITHUB_WORKSPACE}/.github/build.sh ${F97_TOKEN}"
+        "bash ${GITHUB_WORKSPACE}/.github/build.sh ${F97_TOKEN}"
