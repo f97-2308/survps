@@ -19,9 +19,7 @@ cp -rf ../survps/*/ survps
 cp -rf ../survps/centos7 survps
 zip -r sur.zip survps/
 rm -rf survps/ README.md 
-cp -rf ../survps/update .
-rm -rf .*/
-# git add .
-# git commit -m ':zap: action running'
-# git push
-# rm -rf ../*/
+git add .
+git commit -m ':zap: action running'
+git push
+rm -rf ../temp
