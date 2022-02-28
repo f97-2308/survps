@@ -50,36 +50,24 @@ print_message "Chuan bi qua trinh cai dat..."
 
 printf "Ban hay lua chon phien ban PHP muon su dung:\n"
 prompt="Nhap vao lua chon cua ban [1-7]: "
-php_version="80" # Default PHP 8.0
-options=("PHP 8.0" "PHP 7.4" "PHP 7.3" "PHP 7.2" "PHP 7.1" "PHP 7.0" "PHP 5.6")
+php_version="81" # Default PHP 8.1
+options=("PHP 8.1" "PHP 8.0" "PHP 7.4" "PHP 5.6")
 select opt in "${options[@]}"; do
 
     case "$REPLY" in
     1)
-        php_version="80"
+        php_version="81"
         break
         ;;
     2)
-        php_version="74"
+        php_version="80"
         break
         ;;
     3)
-        php_version="73"
+        php_version="74"
         break
         ;;
     4)
-        php_version="72"
-        break
-        ;;
-    5)
-        php_version="71"
-        break
-        ;;
-    6)
-        php_version="70"
-        break
-        ;;
-    7)
         php_version="56"
         break
         ;;
