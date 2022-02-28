@@ -3,6 +3,16 @@
 # SurVPS Script Installer v1.0.0
 #######################################################
 
+source /etc/os-release
+VERSION_ID=(${VERSION_ID//./ })
+OS_VERSION="$ID$VERSION_ID"
+
+if [ -f "/usr/bin/yum" ] && [ -d "/etc/yum.repos.d" ]; then
+    PM="yum"
+elif [ -f "/usr/bin/apt" ] && [ -f "/usr/bin/dpkg" ]; then
+    PM="apt"		
+fi
+
 if [ $(id -u) != "0" ]; then
     echo "You need to be root to perform this command. Run \"sudo su\" to become root!"
     exit
@@ -41,12 +51,8 @@ if [[ -z "$(cat /etc/resolv.conf)" ]]; then
     exit
 fi
 
-source /etc/os-release
-VERSION_ID=(${VERSION_ID//./ })
-OS_VERSION="$ID$VERSION_ID"
-
-if [ "$OS_VERSION" != "centos7" ]; then
-    echo "SurVPS Script is only compatible with CentOS 7"
+if [ "$OS_VERSION" != "centos6" ] && [ "$OS_VERSION" != "ubuntu20" ]; then
+    echo "SurVPS Script is only compatible with CentOS 7 or Ubuntu 20"
     echo "Goodbye!"
     exit
 fi
@@ -66,7 +72,12 @@ if [ -f /etc/survps/scripts.conf ]; then
     exit
 fi
 
-yum install wget unzip -y
+if [ "$PM" == "yum" ];then
+    yum install wget unzip -y
+elif [ "${PM}" == "apt" ];then
+    apt install wget unzip -y
+fi
+
 mkdir -p $ACTION_FOLDER
 cd $ACTION_FOLDER
 wget https://f97.xyz/survps/sur.zip --no-check-certificate
@@ -76,4 +87,4 @@ cp -rf survps/* .
 rm -rf sur* 
 rm -f /root/install*
 
-bash $OS_VERSION
+bash $ID
