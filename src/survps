@@ -16,13 +16,12 @@ options=(
     "Xoa Database" 
     "Doi Pass VPS" 
     "Doi Port Admin" 
-    # "Them Park Domain" 
-    # "Them Redirect Domain" 
+    "Them Park Domain" 
+    "Them Redirect Domain" 
     "Phan Quyen Webserver" 
     "Nang Cap Server" 
     "Cai Dat SSL"
     "Tao Swap"
-    "Google Drive"
     "Xem info"
     "Install Wordpress"
 ) # End Options
@@ -47,13 +46,12 @@ select opt in "${options[@]}" "Thoat"; do
     9) /etc/survps/menu/xoa-database ;;
     10) /etc/survps/menu/change-pass-vps ;;
     11) /etc/survps/menu/change-port-admin ;;
-    # 12) /etc/survps/menu/park-domain ;;
-    # 13) /etc/survps/menu/forward-domain ;;
+    12) /etc/survps/menu/park-domain ;;
+    13) /etc/survps/menu/forward-domain ;;
     12) /etc/survps/menu/phan-quyen-webserver ;;
     13) /etc/survps/menu/nang-cap-server ;;
     14) /etc/survps/menu/install-ssl ;;
     15) /etc/survps/menu/tao-swap ;;
-    16) /etc/survps/menu/rclone ;;
     17) /etc/survps/menu/show-info ;;
     18) /etc/survps/menu/install-wordpress ;;
         # End Menu
