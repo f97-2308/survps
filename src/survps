@@ -42,16 +42,16 @@ select opt in "${options[@]}" "Thoat"; do
     5) /etc/survps/menu/sao-luu-data ;;
     6) /etc/survps/menu/tu-dong-sao-luu ;;
     7) /etc/survps/menu/tat-tu-dong-sao-luu ;;
-    8) /etc/survps/menu/tao-database ;;
+    8) /etc/survps/menu/create-database ;;
     9) /etc/survps/menu/xoa-database ;;
     10) /etc/survps/menu/change-pass-vps ;;
     11) /etc/survps/menu/change-port-admin ;;
     12) /etc/survps/menu/park-domain ;;
     13) /etc/survps/menu/forward-domain ;;
     12) /etc/survps/menu/phan-quyen-webserver ;;
-    13) /etc/survps/menu/nang-cap-server ;;
+    13) /etc/survps/menu/upgrade-server ;;
     14) /etc/survps/menu/install-ssl ;;
-    15) /etc/survps/menu/tao-swap ;;
+    15) /etc/survps/menu/create-swap ;;
     17) /etc/survps/menu/show-info ;;
     18) /etc/survps/menu/install-wordpress ;;
         # End Menu
