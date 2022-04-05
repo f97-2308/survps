@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################################
-# SurVPS Script Installer v1.0.0
+# SurVPS Script Installer v1.0.2
 #######################################################
 
 source /etc/os-release
@@ -80,7 +80,7 @@ fi
 
 mkdir -p $ACTION_FOLDER
 cd $ACTION_FOLDER
-wget https://f97.xyz/survps/sur.zip --no-check-certificate
+wget https://f97.github.io/survps/sur.zip --no-check-certificate
 A | unzip sur.zip
 cp -rf survps/* .
 
